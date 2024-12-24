@@ -1,0 +1,5 @@
+DeviceEvents
+| where ActionType == @"TamperingAttempt"
+| where RegistryKey == @"HKEY_LOCAL_MACHINE\SOFTWARE\POLICIES\MICROSOFT\WINDOWS DEFENDER\Real-Time Protection" or RegistryKey == @"HKEY_LOCAL_MACHINE\SOFTWARE\POLICIES\MICROSOFT\WINDOWS DEFENDER\real-time protection"
+| extend Status = parse_json(AdditionalFields)["Status"]
+| summarize count() by DeviceName, RegistryValueName, tostring(Status)
