@@ -1,0 +1,10 @@
+KQL Query for Identifying Devices with EOS Softwares
+
+
+
+KQL:
+
+
+DeviceTvmSoftwareInventory
+| where EndOfSupportStatus == "EOS Software"
+| summarize count() by DeviceName, SoftwareName, EndOfSupportStatus, EndOfSupportDate
