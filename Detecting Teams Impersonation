@@ -1,0 +1,6 @@
+CloudAppEvents
+| where Application == @"Microsoft Teams"
+| where ActionType == @"TeamsImpersonationDetected"
+| extend UserId = parse_json(RawEventData)["UserId"]
+| extend SenderUPN = parse_json(RawEventData)["Sender"]["UPN"]
+| project Timestamp, Application, ActionType, UserId, SenderUPN
