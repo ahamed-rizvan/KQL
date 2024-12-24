@@ -3,7 +3,8 @@ KQL Query for AntiVirus Scan Completed Devices
 
 KQL:
 
+
 DeviceEvents
 | where ActionType == @"AntivirusScanCompleted"
 | extend ScanType = parse_json(AdditionalFields)["ScanTypeIndex"]
-| summarize count() by Timestamp, DeviceName, tostring(ScanType)
+| summarize count() by Timestamp, DeviceName,ActionType, tostring(ScanType)
