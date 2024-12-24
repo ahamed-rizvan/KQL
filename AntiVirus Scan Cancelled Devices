@@ -1,0 +1,10 @@
+KQL Query for AntiVirus Scan Cancelled Devices
+
+
+KQL:
+
+
+DeviceEvents
+| where ActionType == @"AntivirusScanCancelled"
+| extend ScanType = parse_json(AdditionalFields)["ScanTypeIndex"]
+| summarize count() by Timestamp, DeviceName, ActionType, tostring(ScanType)
