@@ -1,0 +1,9 @@
+KQL Query for Windows Devices without Active AntiVirus
+
+
+KQL:
+
+DeviceTvmInfoGathering
+| extend AvMode = parse_json(AdditionalFields)["AvMode"]
+| where OSPlatform contains "Windows"
+| where AvMode != @"0"
