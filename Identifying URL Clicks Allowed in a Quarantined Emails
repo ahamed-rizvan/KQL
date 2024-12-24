@@ -1,0 +1,15 @@
+KQL Query for Identifying URL Clicks Allowed in a Quarantined Emails
+
+
+
+KQL:
+
+
+
+EmailEvents
+| join UrlClickEvents on NetworkMessageId
+| where ActionType == "ClickAllowed"
+| join EmailPostDeliveryEvents on NetworkMessageId
+| where Action == "Moved to quarantine"
+| extend EmailReceivedTime = Timestamp, URLClickedTime = Timestamp1, EmailQuarantinedTime = Timestamp2, UserIPAddress = IPAddress, ClickedURL = Url, FinalDeliveryLocation = DeliveryLocation1
+| project EmailReceivedTime,SenderFromAddress,SenderIPv4, RecipientEmailAddress, Subject, DeliveryAction, DeliveryLocation,UrlCount, URLClickedTime,ClickedURL,ActionType,UserIPAddress,UrlChain, EmailQuarantinedTime, Action,ActionTrigger, ActionResult, FinalDeliveryLocation,DetectionMethods2
