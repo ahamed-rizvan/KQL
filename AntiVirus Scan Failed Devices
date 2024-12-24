@@ -1,0 +1,11 @@
+KQL Query for AntiVirus Scan Failed Devices
+
+
+KQL:
+
+DeviceEvents
+| where ActionType == @"AntivirusScanFailed"
+| extend ScanType = parse_json(AdditionalFields)["ScanTypeIndex"]
+| extend ErrorCode = parse_json(AdditionalFields)["ErrorCode"]
+| extend ErrorDescription = parse_json(AdditionalFields)["ErrorDescription"]
+| summarize count() by Timestamp, DeviceName, tostring(ScanType), tostring(ErrorCode), tostring(ErrorDescription)
