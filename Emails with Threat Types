@@ -1,0 +1,5 @@
+EmailEvents
+| where ThreatTypes != ""
+| join UrlClickEvents on NetworkMessageId
+| extend EmailReceivedTime = Timestamp, URLClickedTime = Timestamp1, ClickedURL = Url
+| project EmailReceivedTime,SenderFromAddress,SenderIPv4, RecipientEmailAddress, Subject, DeliveryAction, DeliveryLocation, ThreatTypes, UrlCount, URLClickedTime,ClickedURL,ActionType, IsClickedThrough, UrlChain
