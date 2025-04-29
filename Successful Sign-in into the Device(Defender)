@@ -1,0 +1,4 @@
+DeviceLogonEvents
+| where DeviceName =~ ""
+| where ActionType == "LogonSuccess"
+| summarize count() by AccountDomain, AccountName, RemoteIP, ActionType
