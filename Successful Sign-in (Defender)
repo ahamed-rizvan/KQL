@@ -2,3 +2,10 @@ AADSignInEventsBeta
 | where AccountUpn =~ ""
 | where ErrorCode == "0"
 | summarize count() by AccountUpn, IPAddress, Country
+
+
+
+IdentityLogonEvents
+| where AccountUpn =~ ""
+| where ActionType == "LogonSuccess"
+| summarize count() by IPAddress, Location
