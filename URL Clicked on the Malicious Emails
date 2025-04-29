@@ -1,0 +1,3 @@
+EmailEvents
+| where ThreatNames != ""
+| join UrlClickEvents on NetworkMessageId
