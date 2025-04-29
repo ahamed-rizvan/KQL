@@ -1,0 +1,5 @@
+EmailEvents
+| where ThreatNames != ""
+| join EmailAttachmentInfo on NetworkMessageId
+| where SHA256 != ""
+| join DeviceFileEvents on SHA256
