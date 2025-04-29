@@ -1,0 +1,4 @@
+AADSignInEventsBeta
+| where AccountUpn =~ ""
+| where ErrorCode == "0"
+| summarize count() by AccountUpn, IPAddress, Country
